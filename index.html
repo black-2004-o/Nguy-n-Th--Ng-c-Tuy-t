@@ -62,6 +62,7 @@
       margin: 0 10px;
       cursor: pointer;
       transition: 0.3s;
+      position: static; /* đổi position cho nút */
     }
 
     #yesBtn {
@@ -72,7 +73,12 @@
     #noBtn {
       background-color: #dc3545;
       color: white;
-      position: absolute;
+    }
+
+    /* style khi nút noBtn bị disabled */
+    #noBtn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     #message {
@@ -111,7 +117,7 @@
 
     <div class="buttons">
       <button id="yesBtn">Có 💘</button>
-      <button id="noBtn">Không 😝</button>
+      <button id="noBtn" disabled>Không 😝</button>
     </div>
 
     <div id="message"></div>
@@ -146,12 +152,13 @@
       }
     });
 
-    noBtn.addEventListener('mouseover', () => {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 50);
-      noBtn.style.left = `${x}px`;
-      noBtn.style.top = `${y}px`;
-    });
+    // Bỏ sự kiện mouseover của nút noBtn để không chạy trốn nữa
+    // noBtn.addEventListener('mouseover', () => {
+    //   const x = Math.random() * (window.innerWidth - 100);
+    //   const y = Math.random() * (window.innerHeight - 50);
+    //   noBtn.style.left = `${x}px`;
+    //   noBtn.style.top = `${y}px`;
+    // });
 
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
