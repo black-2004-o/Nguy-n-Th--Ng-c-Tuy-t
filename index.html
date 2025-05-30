@@ -5,48 +5,43 @@
   <title>Gửi Nguyễn Thị Ngọc Tuyết</title>
   <style>
     body {
-      background: linear-gradient(to top right, #c2e9fb, #a1c4fd);
-      font-family: 'Times New Roman', serif;
+      background: linear-gradient(to top right, #fcd5ce, #f9dcc4);
+      font-family: 'Comic Sans MS', cursive;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      text-align: center;
       height: 100vh;
       margin: 0;
-      color: #2E4053;
-      text-align: center;
-      padding: 20px;
       overflow: hidden;
     }
 
     .poem-box {
-      background: #ffffffee;
+      background: #fff0f5ee;
       padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+      border-radius: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
       max-width: 600px;
       animation: fadeIn 2s ease-in;
+      position: relative;
     }
 
     h1 {
+      color: #e75480;
       font-size: 28px;
-      color: #D63384;
     }
 
     p {
-      font-size: 20px;
-      margin: 10px 0;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      font-size: 18px;
+      margin: 8px 0;
+      color: #4a4a4a;
     }
 
     .heart {
       font-size: 40px;
-      color: crimson;
-      animation: pulse 1.2s infinite;
+      color: hotpink;
+      animation: pulse 1.5s infinite;
     }
 
     @keyframes pulse {
@@ -60,11 +55,11 @@
     }
 
     button {
-      font-size: 18px;
+      font-size: 16px;
       padding: 10px 20px;
-      margin: 0 10px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
+      margin: 0 10px;
       cursor: pointer;
       transition: 0.3s;
     }
@@ -81,49 +76,110 @@
     }
 
     #message {
-      margin-top: 20px;
+      margin-top: 15px;
       font-size: 20px;
-      color: #D6336C;
+      color: #D63384;
       font-weight: bold;
+    }
+
+    img {
+      width: 100px;
+      margin-top: 10px;
+      animation: float 3s infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
     }
   </style>
 </head>
 <body>
+
+  <audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ nhạc nền.
+  </audio>
+
   <div class="poem-box">
-    <h1>Gửi Nguyễn Thị Ngọc Tuyết ❄️</h1>
+    <h1>💌 Gửi Nguyễn Thị Ngọc Tuyết 💌</h1>
     <p>Tuyết rơi trắng cả trời chiều,</p>
     <p>Lòng anh chỉ biết thương yêu một người.</p>
-    <p>Ngọc Tuyết tên ấy đẹp tươi,</p>
-    <p>Nhẹ nhàng như gió, ngọt lời như hoa.</p>
-    <p>Gặp em là chuyện tình ca,</p>
-    <p>Là duyên là mộng, là ta với mình.</p>
-    <p>Ngọc Tuyết ơi, nhận lời tình,</p>
-    <p>Cho anh bên cạnh giữ gìn trọn yêu... ❤️</p>
-    <div class="heart">❤️</div>
+    <p>Ngọc Tuyết tên ấy tuyệt vời,</p>
+    <p>Ngọt ngào như nắng giữa trời mùa xuân.</p>
+    <p>Gặp em là mộng là thần,</p>
+    <p>Cho anh nguyện giữ trọn phần tình trao.</p>
+    <p>Ngọc Tuyết ơi, có biết nào?</p>
+    <p>Tim anh chỉ có một màu: Yêu em! ❤️</p>
+
+    <div class="heart">💖</div>
+    <img src="https://i.imgur.com/YSaS7Vf.png" alt="cute bear"/>
 
     <div class="buttons">
       <button id="yesBtn">Có 💘</button>
-      <button id="noBtn">Không 😅</button>
+      <button id="noBtn">Không 😝</button>
     </div>
 
     <div id="message"></div>
   </div>
 
+  <!-- Pháo hoa -->
+  <canvas id="fireworks" style="position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none;"></canvas>
+
   <script>
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
     const message = document.getElementById('message');
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
 
+    // Resize canvas
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Nút "Có"
     yesBtn.addEventListener('click', () => {
-      message.innerHTML = 'Anh biết mà! Cảm ơn em đã đồng ý 💖💍';
+      message.innerHTML = 'Yêu em thật nhiều! Cảm ơn em đã đồng ý 💖💍';
+      for (let i = 0; i < 80; i++) {
+        particles.push({
+          x: window.innerWidth / 2,
+          y: window.innerHeight / 2,
+          radius: Math.random() * 3 + 2,
+          dx: (Math.random() - 0.5) * 8,
+          dy: (Math.random() - 0.5) * 8,
+          color: `hsl(${Math.random() * 360}, 100%, 60%)`,
+          life: 100
+        });
+      }
     });
 
+    // Nút "Không" né chuột
     noBtn.addEventListener('mouseover', () => {
-      const x = Math.floor(Math.random() * (window.innerWidth - 100));
-      const y = Math.floor(Math.random() * (window.innerHeight - 50));
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
     });
+
+    // Vẽ pháo hoa
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, i) => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        p.life--;
+        if (p.life <= 0) particles.splice(i, 1);
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
   </script>
 </body>
 </html>
