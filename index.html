@@ -22,7 +22,7 @@
       padding: 30px;
       border-radius: 25px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-      max-width: 600px;
+      max-width: 700px;
       animation: fadeIn 2s ease-in;
       position: relative;
     }
@@ -34,7 +34,7 @@
 
     p {
       font-size: 18px;
-      margin: 8px 0;
+      margin: 6px 0;
       color: #4a4a4a;
     }
 
@@ -82,16 +82,9 @@
       font-weight: bold;
     }
 
-    img {
-      width: 100px;
-      margin-top: 10px;
-      animation: float 3s infinite;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
@@ -99,17 +92,22 @@
 
   <div class="poem-box">
     <h1>💌 Gửi Nguyễn Thị Ngọc Tuyết 💌</h1>
-    <p>Tuyết rơi trắng cả trời chiều,</p>
-    <p>Lòng anh chỉ biết thương yêu một người.</p>
-    <p>Ngọc Tuyết tên ấy tuyệt vời,</p>
-    <p>Ngọt ngào như nắng giữa trời mùa xuân.</p>
-    <p>Gặp em là mộng là thần,</p>
-    <p>Cho anh nguyện giữ trọn phần tình trao.</p>
-    <p>Ngọc Tuyết ơi, có biết nào?</p>
-    <p>Tim anh chỉ có một màu: Yêu em! ❤️</p>
+    <p>Gặp em giữa buổi chiều thu,</p>
+    <p>Ánh nhìn e ấp, dịu như gió ngàn.</p>
+    <p>Chẳng cần hẹn trước hay bàn,</p>
+    <p>Lòng anh bối rối, ngỡ ngàng từ đâu.</p>
+
+    <p>Ngọc Tuyết cái tên dịu màu,</p>
+    <p>Nghe như giọt nắng rơi vào tim anh.</p>
+    <p>Mỗi lần em nhẹ bước quanh,</p>
+    <p>Hồn anh như thể chòng chành sóng xô.</p>
+    
+    <p>Thế nên hôm nay dám vào,</p>
+    <p>Gửi em mấy chữ ngọt ngào thật tâm.</p>
+    <p>Ngọc Tuyết à, nếu được gần,</p>
+    <p>Cho anh một phép được làm người thương. ❤️</p>
 
     <div class="heart">💖</div>
-    <img src="https://i.imgur.com/YSaS7Vf.png" alt="cute bear"/>
 
     <div class="buttons">
       <button id="yesBtn">Có 💘</button>
@@ -130,14 +128,12 @@
     const ctx = canvas.getContext('2d');
     let particles = [];
 
-    // Resize canvas
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    // Nút "Có"
     yesBtn.addEventListener('click', () => {
       message.innerHTML = 'Yêu em thật nhiều! Cảm ơn em đã đồng ý 💖💍';
-      for (let i = 0; i < 80; i++) {
+      for (let i = 0; i < 100; i++) {
         particles.push({
           x: window.innerWidth / 2,
           y: window.innerHeight / 2,
@@ -150,7 +146,6 @@
       }
     });
 
-    // Nút "Không" né chuột
     noBtn.addEventListener('mouseover', () => {
       const x = Math.random() * (window.innerWidth - 100);
       const y = Math.random() * (window.innerHeight - 50);
@@ -158,7 +153,6 @@
       noBtn.style.top = `${y}px`;
     });
 
-    // Vẽ pháo hoa
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach((p, i) => {
